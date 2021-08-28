@@ -10,7 +10,10 @@ import '../../province_model.dart';
 class ProvinceDropdownSearch extends GetView<HomeController> {
   const ProvinceDropdownSearch({
     Key? key,
+    required this.tipe,
   }) : super(key: key);
+
+  final String tipe;
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +58,25 @@ class ProvinceDropdownSearch extends GetView<HomeController> {
           );
         },
         itemAsString: (item) => item.province!,
-        label: "Provinsi Asal",
-        hint: "Pilih Provinsi Asal",
+        label: tipe == "asal" ? "Provinsi Asal" : "Provinsi Tujuan",
+        hint: tipe == "asal" ? "Pilih Provinsi Asal" : "Pilih Provinsi Tujuan",
         onChanged: (prov) {
           if (prov != null) {
-            controller.hiddenKota.value = false;
-            controller.provId.value = int.parse(prov.provinceId!);
-            print(prov.province);
+            if (tipe == 'asal') {
+              controller.hiddenKotaAsal.value = false;
+              controller.provIdAsal.value = int.parse(prov.provinceId!);
+            } else {
+              controller.hiddenKotaTujuan.value = false;
+              controller.provIdTujuan.value = int.parse(prov.provinceId!);
+            }
           } else {
-            controller.hiddenKota.value = true;
-            controller.provId.value = 0;
-            print("No Selected Province");
+            if (tipe == 'asal') {
+              controller.hiddenKotaAsal.value = true;
+              controller.provIdAsal.value = 0;
+            } else {
+              controller.hiddenKotaTujuan.value = true;
+              controller.provIdTujuan.value = 0;
+            }
           }
         },
         showClearButton: true,

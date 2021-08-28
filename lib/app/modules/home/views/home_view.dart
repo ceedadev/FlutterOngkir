@@ -17,12 +17,24 @@ class HomeView extends GetView<HomeController> {
         body: ListView(
           padding: EdgeInsets.all(20),
           children: [
-            ProvinceDropdownSearch(),
-            Obx(() => controller.hiddenKota.isTrue
-                ? SizedBox()
-                : CityDropdownSearch(
-                    provId: controller.provId.value,
-                  ))
+            ProvinceDropdownSearch(tipe: 'asal'),
+            Obx(
+              () => controller.hiddenKotaAsal.isTrue
+                  ? SizedBox()
+                  : CityDropdownSearch(
+                      provId: controller.provIdAsal.value,
+                      tipe: 'asal',
+                    ),
+            ),
+            ProvinceDropdownSearch(tipe: 'tujuan'),
+            Obx(
+              () => controller.hiddenKotaTujuan.isTrue
+                  ? SizedBox()
+                  : CityDropdownSearch(
+                      provId: controller.provIdTujuan.value,
+                      tipe: 'tujuan',
+                    ),
+            ),
           ],
         ));
   }
