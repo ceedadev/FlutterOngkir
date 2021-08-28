@@ -15,4 +15,9 @@ class Province {
     data['province'] = province;
     return data;
   }
+
+  static List<Province> fromJsonList(List list) {
+    if (list.length == 0) return List<Province>.empty();
+    return list.map((item) => Province.fromJson(item)).toList();
+  }
 }
