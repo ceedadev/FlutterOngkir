@@ -75,8 +75,15 @@ class CityDropdownSearch extends GetView<HomeController> {
               controller.cityIdTujuan.value = int.parse(city.cityId!);
             }
           } else {
-            print("City Removed");
+            if (tipe == 'asal') {
+              print('No City Asal Selected');
+              controller.cityIdTujuan.value = 0;
+            } else {
+              print('No City Tujuan Selected');
+              controller.cityIdTujuan.value = 0;
+            }
           }
+          controller.showButton();
         },
         showClearButton: true,
         showSearchBox: true,

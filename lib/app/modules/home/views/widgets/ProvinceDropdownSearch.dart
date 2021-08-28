@@ -78,6 +78,7 @@ class ProvinceDropdownSearch extends GetView<HomeController> {
               controller.provIdTujuan.value = 0;
             }
           }
+          controller.showButton();
         },
         showClearButton: true,
         showSearchBox: true,

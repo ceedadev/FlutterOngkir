@@ -8,6 +8,8 @@ class HomeController extends GetxController {
   var hiddenKotaTujuan = true.obs;
   var provIdTujuan = 0.obs;
   var cityIdTujuan = 0.obs;
+  var kurir = "".obs;
+  var hiddenButton = true.obs;
 
   double berat = 0.0;
   String satuan = 'gram';
@@ -51,6 +53,14 @@ class HomeController extends GetxController {
     }
     satuan = value;
     print(value);
+  }
+
+  void showButton() {
+    if (cityIdAsal != 0 && cityIdTujuan != 0 && berat > 0 && kurir != "") {
+      hiddenButton.value = false;
+    } else {
+      hiddenButton.value = true;
+    }
   }
 
   @override
