@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+
+import '../cost_model.dart';
 
 class HomeController extends GetxController {
   var hiddenKotaAsal = true.obs;
@@ -60,6 +65,51 @@ class HomeController extends GetxController {
       hiddenButton.value = false;
     } else {
       hiddenButton.value = true;
+    }
+  }
+
+  void ongkosKirim() async {
+    Uri url = Uri.parse("https://api.rajaongkir.com/starter/cost");
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          "key": "fd1816b4ba35f38e256ad2c271fadef3",
+        },
+        body: {
+          "origin": "$cityIdAsal",
+          "destination": "$cityIdTujuan",
+          "weight": "$berat",
+          "courier": "$kurir",
+        },
+      );
+
+      var data = json.decode(response.body) as Map<String, dynamic>;
+      var results = data["rajaongkir"]["results"];
+
+      var listAllResult = Cost.fromJsonList(results);
+      var cost1 = listAllResult[0];
+
+      Get.defaultDialog(
+        title: cost1.name.toString(),
+        content: Column(
+          children: cost1.costs!
+              .map((i) => ListTile(
+                    title: Text("${i.service}"),
+                    subtitle: Text("Rp ${i.cost![0].value}"),
+                    trailing: Text(cost1.code == 'pos'
+                        ? "${i.cost![0].etd}"
+                        : "${i.cost![0].etd} Hari"),
+                  ))
+              .toList(),
+        ),
+      );
+    } catch (err) {
+      print(err);
+      Get.defaultDialog(
+        title: "Terjadi Kesalahan",
+        middleText: err.toString(),
+      );
     }
   }
 

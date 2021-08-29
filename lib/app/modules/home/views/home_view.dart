@@ -75,7 +75,7 @@ class HomeView extends GetView<HomeController> {
               : Padding(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(
-                    onPressed: () => print('pressed'),
+                    onPressed: () => controller.ongkosKirim(),
                     child: Text("Cek Ongkos Kirim"),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 20),
