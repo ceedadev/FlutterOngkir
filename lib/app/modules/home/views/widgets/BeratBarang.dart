@@ -1,7 +1,7 @@
+import 'package:Ongkir/app/modules/home/controllers/home_controller.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:ongkir/app/modules/home/controllers/home_controller.dart';
 
 class BeratBarang extends GetView<HomeController> {
   const BeratBarang({Key? key}) : super(key: key);

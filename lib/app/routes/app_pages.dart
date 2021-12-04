@@ -1,7 +1,6 @@
+import 'package:Ongkir/app/modules/home/bindings/home_binding.dart';
+import 'package:Ongkir/app/modules/home/views/home_view.dart';
 import 'package:get/get.dart';
-
-import 'package:ongkir/app/modules/home/bindings/home_binding.dart';
-import 'package:ongkir/app/modules/home/views/home_view.dart';
 
 part 'app_routes.dart';
 
